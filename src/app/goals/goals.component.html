@@ -1,8 +1,6 @@
-<div class="container">
+<div *ngIf="!selected" class="container">
 
 <h1>My Goals App</h1>
-
-<app-goal></app-goal>
 
 
 <!-- <ul>
@@ -13,12 +11,28 @@
   <li>Social</li>
 </ul> -->
 
-
+<label for="id" id="id-num"></label>
+<input type="number" id [(ngModel)]="id" placeholder="id">
 <label for="goal" id="goal-name"></label>
-<input type="text" id="goal">
-<button type="button" class="btn btn-primary" (click)="onClickButton()">Add Goal</button>
+<input type="text" id="goal" [(ngModel)]="name" placeholder="name">
+<button type="submit" class="btn btn-primary" (click)="onClickButton()">Add Goal</button>
 
-<!-- <p>{{status}}</p> -->
+<!-- <p>{{goalName}}</p> -->
+<ul>
+  <li *ngFor="let goal of goals"
+  (click)="onSelect(goal)">
+  ID: {{goal.id}}, Goal name: {{goal.name}}
+</li>
+</ul>
 
-<p *ngFor="let goal of goals">{{goal}}</p>
+<!-- <p *ngFor="let goal of goals">
+  Goal: {{goal.name}}
+<br>
+  Description: {{goal.description}}
+<br>
+  ID: {{goal.id}}
+</p> -->
+
 </div>
+
+<app-goal [goal]="selectedGoal" (closeGoal)="openGoals()"></app-goal>
