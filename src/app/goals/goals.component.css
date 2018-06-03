@@ -1,0 +1,13 @@
+.container{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.mat-chip-list-wrapper {
+  display: flex;
+  flex-direction: column !important;
+  align-items: flex-start;
+  justify-content: flex-start;
+
+}

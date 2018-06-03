@@ -1,5 +1,8 @@
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { GOAL } from '../models/goal.model';
+import { GoalService } from '../services/goal.service'
+import {MatSnackBar} from '@angular/material';
+import { SnackbarComponent } from '../snackbar/snackbar.component';
 
 @Component({
   selector: 'app-goals',
@@ -7,24 +10,35 @@ import { GOAL } from '../models/goal.model';
   styleUrls: ['goals.component.css']
 })
 
-export class GoalsComponent{
+export class GoalsComponent implements OnInit{
 
   title = 'Goals'
   selected: boolean = false;
   selectedGoal: GOAL;
 
-  goals = [];
+  //goals = [];
+  // goalName: string;
+  goals: GOAL[];
   name: string;
   description: string;
   id: number;
 
-  // goalName: string;
+  constructor(private goalService: GoalService, public snackBar: MatSnackBar){}
 
-  onClickButton(){
+  ngOnInit(){
+    this.goals = this.goalService.getGoals();
+  }
+
+  onAddGoal(){
     let goal = new GOAL();
     goal.name = this.name;
     goal.id = this.id;
-    this.goals.push(goal);
+    // this.goals.push(goal);
+
+    this.goalService.addGoal(goal);
+    this.snackBar.openFromComponent(SnackbarComponent, {
+      duration: 500,
+    });
   }
 
   onSelect(goal: GOAL){
@@ -34,6 +48,12 @@ export class GoalsComponent{
 
   openGoals(){
     this.selected = false;
+  }
+
+  openSnackBar() {
+    this.snackBar.openFromComponent(SnackbarComponent, {
+      duration: 500,
+    });
   }
 
 }
