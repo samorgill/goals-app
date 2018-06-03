@@ -1,0 +1,24 @@
+<div class="container">
+
+<h1>My Goals App</h1>
+
+<app-goal></app-goal>
+
+
+<!-- <ul>
+  <li>Fitness</li>
+  <li>Financial</li>
+  <li>Career</li>
+  <li>Family</li>
+  <li>Social</li>
+</ul> -->
+
+
+<label for="goal" id="goal-name"></label>
+<input type="text" id="goal">
+<button type="button" class="btn btn-primary" (click)="onClickButton()">Add Goal</button>
+
+<!-- <p>{{status}}</p> -->
+
+<p *ngFor="let goal of goals">{{goal}}</p>
+</div>
