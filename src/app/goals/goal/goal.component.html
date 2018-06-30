@@ -1,8 +1,15 @@
 <div class="container" *ngIf="goal">
+  <mat-card>
+    <mat-card-title>{{goal.name}}</mat-card-title>
+    <mat-card-content>Goal Date: {{goal.date | date}}</mat-card-content>
+    <mat-card-footer></mat-card-footer>
+    <button mat-mini-fab color="basic">
+      <mat-icon class="fav-icon" (click)="favGoal()" [color]="fav === true ? 'warn' : 'disabled' ">favorite</mat-icon>
+    </button>
+    <button mat-mini-fab color="basic">
+      <mat-icon class="delete-icon" (click)="deleteTheGoal()">delete</mat-icon>
+    </button>
 
-<h2>{{title}}</h2>
-<span>Goal: {{goal.id}} {{goal.name}}</span>
 
-<button mat-raised-button color="accent" (click)="onClickClose()">Show Goals</button>
-
+  </mat-card>
 </div>

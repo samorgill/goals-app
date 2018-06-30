@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core'
-import { GOAL } from '../models/goal.model';
-import { GoalService } from '../services/goal.service'
+import {Component, OnInit} from '@angular/core'
+import {GOAL} from '../models/goal.model';
+import {GoalService} from '../services/goal.service'
 import {MatSnackBar} from '@angular/material';
-import { SnackbarComponent } from '../snackbar/snackbar.component';
+import {SnackbarComponent} from '../snackbar/snackbar.component';
+import {forEach} from '@angular/router/src/utils/collection';
 
 @Component({
   selector: 'app-goals',
@@ -10,7 +11,7 @@ import { SnackbarComponent } from '../snackbar/snackbar.component';
   styleUrls: ['goals.component.css']
 })
 
-export class GoalsComponent implements OnInit{
+export class GoalsComponent implements OnInit {
 
   title = 'Goals'
   selected: boolean = false;
@@ -20,34 +21,47 @@ export class GoalsComponent implements OnInit{
   // goalName: string;
   goals: GOAL[];
   name: string;
+  date: Date;
   description: string;
   id: number;
+  picker: Date;
+  updatedGoal: GOAL;
+  like: boolean;
 
-  constructor(private goalService: GoalService, public snackBar: MatSnackBar){}
+  constructor(private goalService: GoalService, public snackBar: MatSnackBar) {
+  }
 
-  ngOnInit(){
+  ngOnInit() {
     this.goals = this.goalService.getGoals();
   }
 
-  onAddGoal(){
-    let goal = new GOAL();
+  onAddGoal() {
+
+    const goal = new GOAL();
     goal.name = this.name;
-    goal.id = this.id;
+    goal.date = this.date;
+    // goal.id = this.goals.length + 1;
+
     // this.goals.push(goal);
 
     this.goalService.addGoal(goal);
-    this.snackBar.openFromComponent(SnackbarComponent, {
-      duration: 500,
-    });
+
+    this.openSnackBar();
   }
 
-  onSelect(goal: GOAL){
+  onSelect(goal: GOAL) {
     this.selected = true;
     this.selectedGoal = goal;
   }
 
-  openGoals(){
-    this.selected = false;
+  favGoal(event) {
+    this.delGoal();
+    this.goalService.addGoal(event);
+  }
+
+  delGoal() {
+    // this.like = fav;
+    this.goalService.deleteGoal(this.selectedGoal);
   }
 
   openSnackBar() {

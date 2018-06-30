@@ -1,7 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA  } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { MatButtonModule, MatCheckboxModule,  MatChipsModule, MatSnackBarModule } from '@angular/material';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {
+  MatButtonModule,
+  MatCheckboxModule,
+  MatChipsModule,
+  MatSnackBarModule,
+  MatDatepickerModule,
+  MatNativeDateModule, MatFormFieldModule, MatInputModule, MatListModule,
+  MatCardModule,
+  MatToolbarModule,
+  MatIconModule
+} from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
@@ -19,11 +29,20 @@ import { SnackbarComponent } from './snackbar/snackbar.component';
   imports: [
     BrowserModule,
     FormsModule,
+    MatInputModule,
     MatButtonModule,
     MatCheckboxModule,
     BrowserAnimationsModule,
     MatChipsModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    ReactiveFormsModule,
+    MatListModule,
+    MatCardModule,
+    MatToolbarModule,
+    MatIconModule
   ],
   entryComponents: [SnackbarComponent],
   providers: [GoalService],

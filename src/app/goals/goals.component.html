@@ -1,47 +1,57 @@
+<mat-toolbar
+  id="header" selected="true"
+  color="accent" >
+  <h1>My Goals App</h1>
+</mat-toolbar>
 
+<div class="container">
 
-<div *ngIf="!selected" class="container">
+  <!--<mat-list>-->
+    <!--<mat-list-item>Fitness</mat-list-item>-->
+    <!--<mat-list-item>Financial</mat-list-item>-->
+    <!--<mat-list-item>Career</mat-list-item>-->
+    <!--<mat-list-item>Family</mat-list-item>-->
+    <!--<mat-list-item>Social</mat-list-item>-->
+  <!--</mat-list>-->
 
-<h1>My Goals App</h1>
+  <mat-form-field>
+    <label for="goal" id="goal-name"></label>
+    <input matInput type="text" id="goal" [(ngModel)]="name" placeholder="name">
+  </mat-form-field>
 
+  <mat-form-field>
+    <input matInput [matDatepicker]="myDatepicker" [(ngModel)]="date">
+    <mat-datepicker-toggle matSuffix [for]="myDatepicker"></mat-datepicker-toggle>
+    <mat-datepicker #myDatepicker></mat-datepicker>
+  </mat-form-field>
 
-<!-- <ul>
-  <li>Fitness</li>
-  <li>Financial</li>
-  <li>Career</li>
-  <li>Family</li>
-  <li>Social</li>
-</ul> -->
+  <button
+    type="submit"
+    mat-raised-button color="primary"
+    (click)="onAddGoal()"
+  >Add Goal
+  </button>
 
-<label for="id" id="id-num"></label>
-<input type="number" id [(ngModel)]="id" placeholder="id">
-<label for="goal" id="goal-name"></label>
-<input type="text" id="goal" [(ngModel)]="name" placeholder="name">
-<button
-type="submit"
-mat-raised-button color="primary"
-(click)="onAddGoal()"
->Add Goal</button>
+  <!-- <p>{{goalName}}</p> -->
+  <mat-chip-list id="chips">
+    <mat-chip *ngFor="let goal of goals"
+              selected="true"
+              [color]="goal.favorite == true ? 'warn' : 'accent'"
+              (click)="onSelect(goal)">
+      {{goal.name}}
+    </mat-chip>
+  </mat-chip-list>
 
-<!-- <p>{{goalName}}</p> -->
-<mat-chip-list id="chips">
-  <mat-chip *ngFor="let goal of goals"
-  selected="true"
-  color="basic"
-  (click)="onSelect(goal)"
-  >
-  ID: {{goal.id}} <br> Goal name: {{goal.name}}
-</mat-chip>
-</mat-chip-list>
+  <!--color="accent"-->
 
-<!-- <p *ngFor="let goal of goals">
-  Goal: {{goal.name}}
-<br>
-  Description: {{goal.description}}
-<br>
-  ID: {{goal.id}}
-</p> -->
+  <!-- <p *ngFor="let goal of goals">
+    Goal: {{goal.name}}
+  <br>
+    Description: {{goal.description}}
+  <br>
+    ID: {{goal.id}}
+  </p> -->
 
 </div>
 
-<app-goal [goal]="selectedGoal" (closeGoal)="openGoals()"></app-goal>
+<app-goal [goal]="selectedGoal" (deleteGoal)="delGoal($event)" (favouriteGoal)="favGoal($event)"></app-goal>

@@ -4,10 +4,21 @@
   flex-direction: column;
 }
 
+#header{
+  width: 1000px;
+}
+
 .mat-chip-list-wrapper {
   display: flex;
   flex-direction: column !important;
   align-items: flex-start;
   justify-content: flex-start;
+}
 
+button {
+  margin-bottom: 20px;
+}
+
+app-goal{
+  margin-top: 20px;
 }

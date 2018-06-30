@@ -9,19 +9,32 @@ import { GOAL } from '../../models/goal.model';
 export class GoalComponent implements OnInit {
 
   @Input() goal: GOAL;
-  @Output() closeGoal: EventEmitter<boolean> = new EventEmitter();
-  title = 'Selected Goal'
+  @Output() favouriteGoal: EventEmitter<GOAL> = new EventEmitter();
+  @Output() deleteGoal: EventEmitter<any> = new EventEmitter();
+  title = 'Selected Goal';
+  fav: boolean;
 
   constructor() { }
 
   ngOnInit() {
-    
+
   }
 
-  onClickClose(){
-    this.goal = null;
-    this.closeGoal.emit(true);
+  favGoal() {
+    if(this.goal.favorite === false || this.goal.favorite == null){
+      this.fav = true;
+    }else{
+      this.fav = false;
+    }
+    this.goal.favorite = this.fav;
+    this.favouriteGoal.emit(this.goal);
   }
+
+  deleteTheGoal(){
+    this.deleteGoal.emit();
+    this.goal = null;
+  }
+
 
 
 
