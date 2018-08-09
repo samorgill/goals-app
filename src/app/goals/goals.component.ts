@@ -13,7 +13,7 @@ import {forEach} from '@angular/router/src/utils/collection';
 
 export class GoalsComponent implements OnInit {
 
-  title = 'Goals'
+  title = 'Goals';
   selected: boolean = false;
   selectedGoal: GOAL;
 
@@ -42,9 +42,11 @@ export class GoalsComponent implements OnInit {
     goal.date = this.date;
     // goal.id = this.goals.length + 1;
 
-    // this.goals.push(goal);
+    console.log(goal);
 
-    this.goalService.addGoal(goal);
+    this.goals.push(goal);
+
+    // this.goalService.addGoal(goal);
 
     this.openSnackBar();
   }
